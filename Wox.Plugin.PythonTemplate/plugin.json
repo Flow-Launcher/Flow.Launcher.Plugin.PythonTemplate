@@ -1,0 +1,12 @@
+{
+    "ID": "",
+    "ActionKeyword": "",
+    "Name": "plugin",
+    "Description": "",
+    "Author": "",
+    "Version": "0.0.1",
+    "Language": "python",
+    "Website": "",
+    "IcoPath": "assets/favicon.ico",
+    "ExecuteFileName": "main.py"
+}
