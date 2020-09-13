@@ -1,12 +1,12 @@
 {
-    "ID": "",
-    "ActionKeyword": "",
-    "Name": "plugin",
-    "Description": "",
-    "Author": "",
+    "ID": "uuid",
+    "ActionKeyword": "KEYWORD",
+    "Name": "Plugin",
+    "Description": "DESCRIPTION",
+    "Author": "AUTHOR_NAME",
     "Version": "0.0.1",
     "Language": "python",
-    "Website": "",
+    "Website": "https://github.com/USERNAME/Plugin",
     "IcoPath": "assets/favicon.ico",
     "ExecuteFileName": "main.py"
 }

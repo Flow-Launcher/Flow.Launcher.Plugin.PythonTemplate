@@ -4,7 +4,7 @@ import copy
 from typing import List
 
 from plugin.templates import *
-from wox import Wox
+from plugin.wox import Wox
 
 
 class Main(Wox):

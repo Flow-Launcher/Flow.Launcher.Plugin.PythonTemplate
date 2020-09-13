@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from plugin.constants import ICON_PATH
+from plugin.settings import ICON_PATH
 
 
 RESULT_TEMPLATE = {
