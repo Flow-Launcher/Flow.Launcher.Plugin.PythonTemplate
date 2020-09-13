@@ -6,6 +6,8 @@ You can follow the template advice or not. But it could be better, if you do.
 
 ## File Structure
 
+<!-- TODO: update file & folder tree -->
+
 ```
 .
 │  .env
@@ -29,9 +31,20 @@ You can follow the template advice or not. But it could be better, if you do.
         __init__.py
 ```
 
-## TODO
+## Commandas
+
+<!-- TODO: write docs -->
+
+...
+
+## Localizations
+
+...
+
+## ToDos
 
 - [ ] database
 - [ ] args parser
-- [ ] local language
+- [x] auto commands
+- [x] local language
 - [ ] ui not command
