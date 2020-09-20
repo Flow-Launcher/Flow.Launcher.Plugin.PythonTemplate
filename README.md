@@ -4,7 +4,7 @@ Just a Python Template Advice for Wox plugin, not a plugin.
 
 You can follow the template advice or not. But it could be better if you do.
 
-## File Structure
+## :file_folder: File Structure
 
 ``` 
 .
@@ -36,9 +36,9 @@ You can follow the template advice or not. But it could be better if you do.
                 └─zh_CN
 ```
 
-## Features
+## :sparkles: Features
 
-### Commandas
+### :desktop_computer: Commandas
 
 Using `click` to integrate the command function.
 
@@ -50,7 +50,7 @@ Just like follow.
 python commands.py gen-plugin-info
 ```
 
-### Localizations
+### :globe_with_meridians: Localizations
 
 Using `gettext` to integrate localization function.
 
@@ -74,7 +74,7 @@ After all of this, we need to compile the `.po` to `.mo` file.
 python commands.py compile
 ```
 
-## ToDos
+## :runner: ToDos
 
 * [x] auto commands
 * [x] local language
