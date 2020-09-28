@@ -4,6 +4,11 @@ Just a Python Template Advice for Wox plugin, not a plugin.
 
 You can follow the template advice or not. But it could be better if you do.
 
+## :bookmark: Versions
+
+- [Flow](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master)
+- [Wox](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/wox)
+
 ## :file_folder: File Structure
 
 ``` 
