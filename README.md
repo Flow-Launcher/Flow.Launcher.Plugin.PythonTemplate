@@ -79,6 +79,11 @@ After all of this, we need to compile the `.po` to `.mo` file.
 python commands.py compile
 ```
 
+## :pushpin: Requirements
+
+- [`flowlauncher`](https://github.com/Flow-Launcher/Flow.Launcher.JsonRPC.Python) Flow's jsonRPC API for Python. It's **NECESSARY** for plugin.
+- `python-dotenv` User's config package.
+
 ## :runner: ToDos
 
 * [x] auto commands
