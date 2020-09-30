@@ -3,11 +3,12 @@
 import copy
 from typing import List
 
+from flowlauncher import FlowLauncher
+
 from plugin.templates import *
-from plugin.wox import Wox
 
 
-class Main(Wox):
+class Main(FlowLauncher):
     messages_queue = []
 
     def sendNormalMess(self, title: str, subtitle: str):
