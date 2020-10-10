@@ -54,7 +54,7 @@ def compile():
 
 @click.group()
 def plugin():
-    """Translation and localization commands."""
+    """Plugin commands."""
     ...
 
 
