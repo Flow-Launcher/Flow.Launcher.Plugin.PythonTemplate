@@ -54,13 +54,13 @@ def compile():
 
 @click.group()
 def plugin():
-    """Translation and localization commands."""
+    """Plugin commands."""
     ...
 
 
 @plugin.command()
 def gen_plugin_info():
-    """Auto generate the `plugin.json` file for Wox"""
+    """Auto generate the `plugin.json` file for Flow"""
 
     plugin_infos = {
         "ID": PLUGIN_ID,
