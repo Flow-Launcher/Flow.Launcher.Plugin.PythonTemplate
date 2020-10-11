@@ -2,13 +2,16 @@
 
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 
-basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+setting_pyfile = Path(__file__).resolve()
+pludir = setting_pyfile.parent
+basedir = pludir.parent
 
-dotenv_path = os.path.join(basedir, '.env')
-if os.path.exists(dotenv_path):
+dotenv_path = basedir / '.env'
+if dotenv_path.exists():
     load_dotenv(dotenv_path)
 
 
