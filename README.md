@@ -209,7 +209,7 @@ pip install -r requirements.txt
 
 The file that Flow uses to incorporate your plugin to the plugin manifest list.
 
-See [commands.py](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master#commandspy).
+See [commands.py](#computer-commandspy).
 
 ### :wrench: Config File
 
