@@ -48,29 +48,41 @@ It is not mandatory to use this template, however doing so helps standardize Pyt
 
 The following is some more detail on the important files.
 
-### :open_file_folder: plugin.json
+### :snake: Script File
 
-The file that Flow uses to incorporate your plugin to the plugin manifest list. See [https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master#commands.py].
-
-### :open_file_folder: .env
-
-User config file. Currently sets the language for the plugin. The user will need to manually edit this once the plugin is installed to change the language (if you have localized the plugin. See [https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master#open_file_folder-commands.py]).
-
-### :open_file_folder: main.py
+#### main.py
 
 The Python entry point to your plugin. You shouldn't have to edit this file.
 
-### :open_file_folder: test.py
+#### test.py
 
 A file that calls the Flowlauncher query via `main.py` and displays the results on the command line so you can debug. This file is for developing and doesn't need to be packaged with the plugin.
 
-### :open_file_folder: commands.py
+#### extensions.py
+
+Currently used for localization and shouldn't need to be edited unless you change where the localization files are stored.
+
+#### settings.py
+
+Edit this file to add in information for your plugin that is used throughout the code. Also uses the Python dotenv package to load the `.env` file for localization.
+
+#### templates.py
+
+Comes with templates for the JSONRPC query result and action. Other templates can be added here as you need them.
+
+#### ui.py
+
+The interaction with the FlowLauncher JSONRPC happens here. The Query function will have your main query logic. Most of your code and development will happen in this file and `utils.py`.
+
+#### utils.py
+
+This Python file will hold all your support functions for your plugin.
+
+#### :computer: commands.py
 
 This template uses the Python `click` package to parse the command line arguments for the different functions that `commands.py` can perform..
 
-Those functions are:
-
-#### gen-plugin-info
+##### gen-plugin-info
 
 ```python
 python commands.py gen-plugin-info
@@ -78,7 +90,9 @@ python commands.py gen-plugin-info
 
 We can use the `commands.py` to update `plugin.json` using the variables from the package itself. These are imported from `settings.py` in the **plugin** folder.
 
-#### :wrench: init (localization)
+##### :globe_with_meridians: Localization Commands
+
+###### init
 
 ```python
 python commands.py init lang
@@ -102,7 +116,7 @@ self.sendNormalMess(_("Error - {}").format(my_err_string), _("Check documentatio
 
 We can initialize a language (en, zh, es, etc.) using the init function. This uses `babel.cfg` to know where and which files to search for the `gettext` strings. This will add these strings to a special text file - `messages.po` for each language in the **translations** folder. You can then edit this file to add in the specific string translations for that specific language.
 
-#### update (localization)
+###### update
 
 ```python
 python commands.py update
@@ -110,7 +124,7 @@ python commands.py update
 
 When you update your code, use this function to update the localization strings.
 
-#### compile (localization)
+###### compile
 
 ```python
 python commands.py compile
@@ -118,7 +132,10 @@ python commands.py compile
 
 Before shipping the plugin, we need to compile the `.po` file to a `.mo` file for each langauge with the compile function.
 
-### :open_file_folder: requirements.txt
+
+### :package: Package File
+
+#### requirements.txt
 
 The Python package requirements for your plugin. Currently the user needs to manually install these once they have installed the plugin as Flow does no Python package management. The easiest way to do this is for the user to run.
 
@@ -126,33 +143,28 @@ The Python package requirements for your plugin. Currently the user needs to man
 pip install -r requirements.txt
 ```
 
-### :open_file_folder: babel.cfg
+#### plugin.json
+
+The file that Flow uses to incorporate your plugin to the plugin manifest list. See [https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master#commands.py].
+
+### :wrench: Config File
+
+#### .env
+
+User config file. Currently sets the language for the plugin. The user will need to manually edit this once the plugin is installed to change the language (if you have localized the plugin. See [https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master#open_file_folder-commands.py]).
+
+#### babel.cfg
 
 Babel config file showing where to look for strings that can be translated.
 
-### :open_file_folder: plugin\\extensions.py
 
-Currently used for localization and shouldn't need to be edited unless you change where the localization files are stored.
+### :globe_with_meridians: Localization
 
-### :open_file_folder: plugin\\settings.py
+These are your localization folders for each langauge your plugin supports.
 
-Edit this file to add in information for your plugin that is used throughout the code. Also uses the Python dotenv package to load the `.env` file for localization.
+`plugin\translations\[LANGUAGE]\LC_MESSAGES`
 
-### :open_file_folder: plugin\\templates.py
-
-Comes with templates for the JSONRPC query result and action. Other templates can be added here as you need them.
-
-### :open_file_folder: plugin\\ui.py
-
-The interaction with the FlowLauncher JSONRPC happens here. The Query function will have your main query logic. Most of your code and development will happen in this file and `utils.py`.
-
-### :open_file_folder: plugin\\utils.py
-
-This Python file will hold all your support functions for your plugin.
-
-### :open_file_folder: plugin\\translations\\\[LANGUAGE\]\\LC_MESSAGES
-
-These are your localization folders for each langauge your plugin supports. The template comes with English (US) and Chinese but you can add as many as you would like to support. The `po` and the `mo` files are described above.
+The template comes with English (US) and Chinese but you can add as many as you would like to support. The `po` and the `mo` files are described above.
 
 ## :runner: ToDos
 
