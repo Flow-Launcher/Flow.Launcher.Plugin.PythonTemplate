@@ -223,7 +223,7 @@ Currently sets the language for the plugin.
 
 The user will need to manually edit this once the plugin is installed to change the language.
 
-If you have localized the plugin,please see [commands.py](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.PythonTemplate/tree/master#commandspy).
+If you have localized the plugin,please see [commands.py](#computer-commandspy).
 
 #### babel.cfg
 
