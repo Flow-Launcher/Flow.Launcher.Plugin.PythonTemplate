@@ -10,6 +10,12 @@ from plugin.templates import *
 
 class Main(FlowLauncher):
     messages_queue = []
+    
+    def callBackMethodSample(self, **args):
+        action = copy.deepcopy(ACTION_TEMPLATE)
+        // do what you want to do
+        
+        return message
 
     def sendNormalMess(self, title: str, subtitle: str):
         message = copy.deepcopy(RESULT_TEMPLATE)
@@ -28,7 +34,7 @@ class Main(FlowLauncher):
         action = copy.deepcopy(ACTION_TEMPLATE)
         action['JsonRPCAction']['method'] = method
         action['JsonRPCAction']['parameters'] = value
-        message.update(action)
+        message['JsonRPCAction'] = action;
 
         self.messages_queue.append(message)
 
