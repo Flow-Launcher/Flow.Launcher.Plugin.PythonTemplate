@@ -11,8 +11,6 @@ RESULT_TEMPLATE = {
 }
 
 ACTION_TEMPLATE = {
-    'JsonRPCAction': {
-        'method': '',
-        'parameters': [],
-    }
+    'method': '',
+    'parameters': [],
 }
