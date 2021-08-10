@@ -2,6 +2,7 @@
 
 import json
 import os
+from textwrap import dedent
 
 import click
 
@@ -98,6 +99,52 @@ def gen_plugin_info():
 
     with open(basedir / "plugin.json", "w") as f:
         json.dump(plugin_infos, f, indent=4)
+
+    click.echo("Done.")
+
+
+@plugin.command()
+def build():
+    "Pack plugin to a zip file."
+
+    # zip plugin
+    build_path = basedir / "build"
+    build_path.mkdir(exist_ok=True)
+    zip_path = build_path / f"{__package_name__.title()}-{__version__}.zip"
+    zip_path.unlink(missing_ok=True)
+
+    ignore_list = [
+        # folder
+        ".git/*",
+        ".vscode/*",
+        ".history/*",
+        "*/__pycache__/*",
+        "build/*",
+        # file
+        ".gitignore",
+        ".gitattributes",
+    ]
+    os.system(f"zip -r {zip_path} . -x {' '.join(ignore_list)}")
+
+    # hook lib folder path to python system environment variable path
+    env_snippet = dedent(
+        """\
+    import os
+    import sys
+
+    basedir = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.join(basedir, "lib"))
+    """
+    )
+
+    entry_src = basedir / "main.py"
+    entry_src_temp = build_path / "main.py"
+    with open(entry_src, "r") as f_r:
+        with open(entry_src_temp, "w", encoding="utf-8") as f_w:
+            f_w.write(env_snippet + f_r.read())
+
+    os.system(f"zip -j {zip_path} {entry_src_temp}")
+    entry_src_temp.unlink()
 
     click.echo("Done.")
 
