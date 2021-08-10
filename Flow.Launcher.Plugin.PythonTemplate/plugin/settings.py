@@ -29,7 +29,7 @@ __short_description__ = "DESCRIPTION"
 GITHUB_USERNAME = "USERNAME"
 
 
-readme_path = os.path.join(basedir, 'README.md')
+readme_path = basedir / "README.md"
 try:
     __long_description__ = open(readme_path, "r").read()
 except:
