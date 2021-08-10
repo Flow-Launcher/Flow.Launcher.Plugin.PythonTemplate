@@ -70,6 +70,16 @@ def plugin():
 
 
 @plugin.command()
+def install_dependencies():
+    """Install dependencies to local."""
+
+    lib_path = basedir / "lib"
+    os.system(f"pip install -r requirements.txt -t {lib_path} --upgrade")
+
+    click.echo("Done.")
+
+
+@plugin.command()
 def gen_plugin_info():
     """Auto generate the 'plugin.json' file for Flow."""
 
@@ -92,7 +102,11 @@ def gen_plugin_info():
     click.echo("Done.")
 
 
-cli = click.CommandCollection(sources=[plugin, translate])
-
 if __name__ == "__main__":
+    cli = click.CommandCollection(
+        sources=[
+            plugin,
+            translate,
+        ]
+    )
     cli()
