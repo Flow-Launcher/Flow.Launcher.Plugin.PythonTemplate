@@ -86,9 +86,8 @@ def gen_plugin_info():
         "ExecuteFileName": PLUGIN_EXECUTE_FILENAME,
     }
 
-    json_path = os.path.join(basedir, "plugin.json")
-    with open(json_path, "w") as f:
-        json.dump(plugin_infos, f, indent=" " * 4)
+    with open(basedir / "plugin.json", "w") as f:
+        json.dump(plugin_infos, f, indent=4)
 
     click.echo("Done.")
 
