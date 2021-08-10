@@ -56,6 +56,7 @@ def update():
 @translate.command()
 def compile():
     """Compile all languages."""
+
     if os.system("pybabel compile -d plugin/translations"):
         raise RuntimeError("compile command failed")
 
@@ -70,7 +71,7 @@ def plugin():
 
 @plugin.command()
 def gen_plugin_info():
-    """Auto generate the `plugin.json` file for Flow"""
+    """Auto generate the 'plugin.json' file for Flow."""
 
     plugin_infos = {
         "ID": PLUGIN_ID,
