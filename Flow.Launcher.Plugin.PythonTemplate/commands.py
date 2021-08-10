@@ -5,10 +5,20 @@ import os
 
 import click
 
-from plugin import (ICON_PATH, PLUGIN_ACTION_KEYWORD, PLUGIN_AUTHOR,
-                    PLUGIN_EXECUTE_FILENAME, PLUGIN_ID, PLUGIN_PROGRAM_LANG,
-                    PLUGIN_URL, __long_description__, __package_name__,
-                    __short_description__, __version__, basedir)
+from plugin import (
+    ICON_PATH,
+    PLUGIN_ACTION_KEYWORD,
+    PLUGIN_AUTHOR,
+    PLUGIN_EXECUTE_FILENAME,
+    PLUGIN_ID,
+    PLUGIN_PROGRAM_LANG,
+    PLUGIN_URL,
+    __long_description__,
+    __package_name__,
+    __short_description__,
+    __version__,
+    basedir,
+)
 
 
 @click.group()
@@ -18,38 +28,38 @@ def translate():
 
 
 @translate.command()
-@click.argument('locale')
+@click.argument("locale")
 def init(locale):
     """Initialize a new language."""
 
-    if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
-        raise RuntimeError('extract command failed')
-    if os.system('pybabel init -i messages.pot -d plugin/translations -l ' + locale):
-        raise RuntimeError('init command failed')
-    os.remove('messages.pot')
+    if os.system("pybabel extract -F babel.cfg -k _l -o messages.pot ."):
+        raise RuntimeError("extract command failed")
+    if os.system("pybabel init -i messages.pot -d plugin/translations -l " + locale):
+        raise RuntimeError("init command failed")
+    os.remove("messages.pot")
 
-    click.echo('Done.')
+    click.echo("Done.")
 
 
 @translate.command()
 def update():
     """Update all languages."""
-    if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
-        raise RuntimeError('extract command failed')
-    if os.system('pybabel update -i messages.pot -d plugin/translations'):
-        raise RuntimeError('update command failed')
-    os.remove('messages.pot')
+    if os.system("pybabel extract -F babel.cfg -k _l -o messages.pot ."):
+        raise RuntimeError("extract command failed")
+    if os.system("pybabel update -i messages.pot -d plugin/translations"):
+        raise RuntimeError("update command failed")
+    os.remove("messages.pot")
 
-    click.echo('Done.')
+    click.echo("Done.")
 
 
 @translate.command()
 def compile():
     """Compile all languages."""
-    if os.system('pybabel compile -d plugin/translations'):
-        raise RuntimeError('compile command failed')
+    if os.system("pybabel compile -d plugin/translations"):
+        raise RuntimeError("compile command failed")
 
-    click.echo('Done.')
+    click.echo("Done.")
 
 
 @click.group()
@@ -72,14 +82,14 @@ def gen_plugin_info():
         "Language": PLUGIN_PROGRAM_LANG,
         "Website": PLUGIN_URL,
         "IcoPath": ICON_PATH,
-        "ExecuteFileName": PLUGIN_EXECUTE_FILENAME
+        "ExecuteFileName": PLUGIN_EXECUTE_FILENAME,
     }
 
-    json_path = os.path.join(basedir, 'plugin.json')
-    with open(json_path, 'w') as f:
-        json.dump(plugin_infos, f, indent=' '*4)
+    json_path = os.path.join(basedir, "plugin.json")
+    with open(json_path, "w") as f:
+        json.dump(plugin_infos, f, indent=" " * 4)
 
-    click.echo('Done.')
+    click.echo("Done.")
 
 
 cli = click.CommandCollection(sources=[plugin, translate])
