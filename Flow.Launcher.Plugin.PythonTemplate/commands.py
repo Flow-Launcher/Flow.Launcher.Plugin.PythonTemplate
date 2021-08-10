@@ -102,9 +102,35 @@ def gen_plugin_info():
     click.echo("Done.")
 
 
+@click.group()
+def clean():
+    """Clean commands."""
+    ...
+
+
+@clean.command()
+def clean_build():
+    """Remove build artifacts"""
+
+    os.system("rm -fr build/")
+    click.echo("Done.")
+
+
+@clean.command()
+def clean_pyc():
+    "Remove Python file artifacts"
+
+    os.system(f"find {basedir} -name '*.pyc' -exec rm -f {{}} +")
+    os.system(f"find {basedir} -name '*.pyo' -exec rm -f {{}} +")
+    os.system(f"find {basedir} -name '*~' -exec rm -f {{}} +")
+
+    click.echo("Done.")
+
+
 if __name__ == "__main__":
     cli = click.CommandCollection(
         sources=[
+            clean,
             plugin,
             translate,
         ]
