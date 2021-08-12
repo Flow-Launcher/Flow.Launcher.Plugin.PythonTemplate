@@ -79,6 +79,13 @@ def install_dependencies():
 
     click.echo("Done.")
 
+@plugin.command()
+def setup_dev_env():
+    """Set up the development environment for the first time. This installs requirements-dev.txt """
+
+    os.system(f"pip install -r requirements-dev.txt --upgrade")
+
+    click.echo("Dev environment ready to go.")
 
 @plugin.command()
 def gen_plugin_info():
