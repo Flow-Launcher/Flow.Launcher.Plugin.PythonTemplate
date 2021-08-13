@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-publish:
-    name: Build and publish geopandas to PyPI
+    name: Build and publish plugin
     runs-on: ubuntu-latest
 
     steps:
