@@ -34,7 +34,10 @@ except:
     __long_description__ = __short_description__
 
 
-# other information
+# extensions
+TRANSLATIONS_PATH = basedir / "plugin/translations"
+
+# plugin.json
 PLUGIN_ID = "uuid"  # could generate via python `uuid` official package
 ICON_PATH = "assets/favicon.ico"
 PLUGIN_AUTHOR = "AUTHOR_NAME"

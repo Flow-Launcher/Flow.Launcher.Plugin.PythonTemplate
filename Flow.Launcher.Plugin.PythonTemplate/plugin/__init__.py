@@ -16,6 +16,7 @@ from plugin.settings import (
     PLUGIN_URL,
     PLUGIN_URL_DOWNLOAD,
     PLUGIN_URL_SOURCE_CODE,
+    TRANSLATIONS_PATH,
     __long_description__,
     __package_name__,
     __short_description__,

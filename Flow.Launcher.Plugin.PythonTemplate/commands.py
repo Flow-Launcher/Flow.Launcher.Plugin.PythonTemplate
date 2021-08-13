@@ -17,6 +17,7 @@ from plugin import (
     PLUGIN_URL,
     PLUGIN_URL_DOWNLOAD,
     PLUGIN_URL_SOURCE_CODE,
+    TRANSLATIONS_PATH,
     __long_description__,
     __package_name__,
     __short_description__,
@@ -35,7 +36,6 @@ lib_path.mkdir(exist_ok=True)
 build_ignore_path = basedir / ".buildignore"
 build_ignore_path.touch()  # if no existed, would be created
 entry_src = basedir / PLUGIN_EXECUTE_FILENAME
-translations_path = basedir / "plugin/translations"
 plugin_info_path = basedir / "plugin.json"
 
 plugin_infos = {
@@ -100,7 +100,7 @@ def init(locale):
 
     if os.system("pybabel extract -F babel.cfg -k _l -o messages.pot ."):
         raise RuntimeError("extract command failed")
-    if os.system(f"pybabel init -i messages.pot -d {translations_path} -l {locale}"):
+    if os.system(f"pybabel init -i messages.pot -d {TRANSLATIONS_PATH} -l {locale}"):
         raise RuntimeError("init command failed")
     os.remove("messages.pot")
 
@@ -112,7 +112,7 @@ def update():
     """Update all languages."""
     if os.system("pybabel extract -F babel.cfg -k _l -o messages.pot ."):
         raise RuntimeError("extract command failed")
-    if os.system(f"pybabel update -i messages.pot -d {translations_path}"):
+    if os.system(f"pybabel update -i messages.pot -d {TRANSLATIONS_PATH}"):
         raise RuntimeError("update command failed")
     os.remove("messages.pot")
 
@@ -123,7 +123,7 @@ def update():
 def compile():
     """Compile all languages."""
 
-    if os.system(f"pybabel compile -d {translations_path}"):
+    if os.system(f"pybabel compile -d {TRANSLATIONS_PATH}"):
         raise RuntimeError("compile command failed")
 
     click.echo("Done.")
