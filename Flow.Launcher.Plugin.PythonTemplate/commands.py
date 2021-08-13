@@ -3,6 +3,7 @@
 import json
 import os
 from textwrap import dedent
+from typing import List
 
 import click
 
@@ -20,6 +21,24 @@ from plugin import (
     __version__,
     basedir,
 )
+
+build_ignore_path = basedir / ".buildignore"
+build_ignore_path.touch()  # if no existed, would be created
+
+
+def get_build_ignores(comment: str = "#") -> List[str]:
+    """
+    Ignore file or folder when building a plugin, similar to '.gitignore'.
+    """
+    ignore_list = []
+
+    with open(build_ignore_path, "r") as f:
+        for line in f.readlines():
+            line = line.strip()
+            if line and not line.startswith(comment):
+                ignore_list.append(line)
+
+    return ignore_list
 
 
 @click.group()
@@ -113,17 +132,7 @@ def build():
     zip_path = build_path / f"{__package_name__.title()}-{__version__}.zip"
     zip_path.unlink(missing_ok=True)
 
-    ignore_list = [
-        # folder
-        ".git/*",
-        ".vscode/*",
-        ".history/*",
-        "*/__pycache__/*",
-        "build/*",
-        # file
-        ".gitignore",
-        ".gitattributes",
-    ]
+    ignore_list = get_build_ignores()
     os.system(f"zip -r {zip_path} . -x {' '.join(ignore_list)}")
 
     # hook lib folder path to python system environment variable path
