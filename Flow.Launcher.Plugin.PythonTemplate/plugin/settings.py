@@ -15,8 +15,6 @@ if dotenv_path.exists():
     load_dotenv(dotenv_path)
 
 
-ICON_PATH = "assets/favicon.ico"
-
 # The default value can work, if no user config.
 CONFIG = os.getenv("CONFIG", "default config")
 LOCAL = os.getenv("local", "en")
@@ -37,12 +35,12 @@ except:
 
 
 # other information
-PLUGIN_ID = "uuid"
+PLUGIN_ID = "uuid"  # could generate via python `uuid` official package
 ICON_PATH = "assets/favicon.ico"
-PLUGIN_ACTION_KEYWORD = "KEYWORD"
 PLUGIN_AUTHOR = "AUTHOR_NAME"
+PLUGIN_ACTION_KEYWORD = "KEYWORD"
 PLUGIN_PROGRAM_LANG = "python"
-PLUGIN_URL = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
 PLUGIN_EXECUTE_FILENAME = "main.py"
+PLUGIN_URL = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
 PLUGIN_URL_DOWNLOAD = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
 PLUGIN_URL_SOURCE_CODE = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
