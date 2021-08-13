@@ -22,8 +22,17 @@ from plugin import (
     basedir,
 )
 
+# constants
+# folder
+build_path = basedir / "build"
+build_path.mkdir(exist_ok=True)
+lib_path = basedir / "lib"
+lib_path.mkdir(exist_ok=True)
+
+# file
 build_ignore_path = basedir / ".buildignore"
 build_ignore_path.touch()  # if no existed, would be created
+entry_src = basedir / PLUGIN_EXECUTE_FILENAME
 
 
 def get_build_ignores(comment: str = "#") -> List[str]:
@@ -93,7 +102,6 @@ def plugin():
 def install_dependencies():
     """Install dependencies to local."""
 
-    lib_path = basedir / "lib"
     os.system(f"pip install -r requirements.txt -t {lib_path} --upgrade")
 
     click.echo("Done.")
@@ -127,8 +135,6 @@ def build():
     "Pack plugin to a zip file."
 
     # zip plugin
-    build_path = basedir / "build"
-    build_path.mkdir(exist_ok=True)
     zip_path = build_path / f"{__package_name__.title()}-{__version__}.zip"
     zip_path.unlink(missing_ok=True)
 
@@ -146,7 +152,6 @@ def build():
     """
     )
 
-    entry_src = basedir / "main.py"
     entry_src_temp = build_path / "main.py"
     with open(entry_src, "r") as f_r:
         with open(entry_src_temp, "w", encoding="utf-8") as f_w:
