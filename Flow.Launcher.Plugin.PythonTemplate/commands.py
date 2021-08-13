@@ -50,6 +50,24 @@ def get_build_ignores(comment: str = "#") -> List[str]:
     return ignore_list
 
 
+def hook_env_snippet(temp_path):
+    """Hook lib folder path to python system environment variable path."""
+
+    env_snippet = dedent(
+        f"""\
+    import os
+    import sys
+
+    basedir = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.join(basedir, "{lib_path.name}"))
+    """
+    )
+
+    with open(entry_src, "r") as f_r:
+        with open(temp_path, "w") as f_w:
+            f_w.write(env_snippet + f_r.read())
+
+
 @click.group()
 def translate():
     """Translation and localization commands."""
@@ -141,24 +159,10 @@ def build():
     ignore_list = get_build_ignores()
     os.system(f"zip -r {zip_path} . -x {' '.join(ignore_list)}")
 
-    # hook lib folder path to python system environment variable path
-    env_snippet = dedent(
-        """\
-    import os
-    import sys
-
-    basedir = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(os.path.join(basedir, "lib"))
-    """
-    )
-
-    entry_src_temp = build_path / "main.py"
-    with open(entry_src, "r") as f_r:
-        with open(entry_src_temp, "w", encoding="utf-8") as f_w:
-            f_w.write(env_snippet + f_r.read())
-
-    os.system(f"zip -j {zip_path} {entry_src_temp}")
-    entry_src_temp.unlink()
+    entry_src_hooked = build_path / PLUGIN_EXECUTE_FILENAME
+    hook_env_snippet(entry_src_hooked)
+    os.system(f"zip -j {zip_path} {entry_src_hooked}")
+    entry_src_hooked.unlink()
 
     click.echo("Done.")
 
