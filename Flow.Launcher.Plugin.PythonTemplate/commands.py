@@ -15,6 +15,8 @@ from plugin import (
     PLUGIN_ID,
     PLUGIN_PROGRAM_LANG,
     PLUGIN_URL,
+    PLUGIN_URL_DOWNLOAD,
+    PLUGIN_URL_SOURCE_CODE,
     __long_description__,
     __package_name__,
     __short_description__,
@@ -33,6 +35,21 @@ lib_path.mkdir(exist_ok=True)
 build_ignore_path = basedir / ".buildignore"
 build_ignore_path.touch()  # if no existed, would be created
 entry_src = basedir / PLUGIN_EXECUTE_FILENAME
+
+plugin_infos = {
+    "ID": PLUGIN_ID,
+    "ActionKeyword": PLUGIN_ACTION_KEYWORD,
+    "Name": __package_name__,
+    "Description": __short_description__,
+    "Author": PLUGIN_AUTHOR,
+    "Version": __version__,
+    "Language": PLUGIN_PROGRAM_LANG,
+    "Website": PLUGIN_URL,
+    "IcoPath": ICON_PATH,
+    "ExecuteFileName": PLUGIN_EXECUTE_FILENAME,
+    "UrlDownload": PLUGIN_URL_DOWNLOAD,
+    "UrlSourceCode": PLUGIN_URL_SOURCE_CODE,
+}
 
 
 def get_build_ignores(comment: str = "#") -> List[str]:
@@ -129,19 +146,6 @@ def install_dependencies():
 def gen_plugin_info():
     """Auto generate the 'plugin.json' file for Flow."""
 
-    plugin_infos = {
-        "ID": PLUGIN_ID,
-        "ActionKeyword": PLUGIN_ACTION_KEYWORD,
-        "Name": __package_name__.title(),
-        "Description": __short_description__,
-        "Author": PLUGIN_AUTHOR,
-        "Version": __version__,
-        "Language": PLUGIN_PROGRAM_LANG,
-        "Website": PLUGIN_URL,
-        "IcoPath": ICON_PATH,
-        "ExecuteFileName": PLUGIN_EXECUTE_FILENAME,
-    }
-
     with open(basedir / "plugin.json", "w") as f:
         json.dump(plugin_infos, f, indent=4)
 
@@ -152,8 +156,7 @@ def gen_plugin_info():
 def build():
     "Pack plugin to a zip file."
 
-    # zip plugin
-    zip_path = build_path / f"{__package_name__.title()}-{__version__}.zip"
+    zip_path = build_path / f"{__package_name__}-{__version__}.zip"
     zip_path.unlink(missing_ok=True)
 
     ignore_list = get_build_ignores()
