@@ -1,4 +1,4 @@
-name: Publish Plugin to GitHub
+name: Build and Publish
 
 on:
   push:
@@ -7,17 +7,18 @@ on:
 
 jobs:
   build-publish:
-    name: Build and publish plugin
+    name: Build and Publish
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Python
+
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
 
-      - name: Setup Environment
+      - name: Set up Environment
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
