@@ -163,7 +163,8 @@ def build():
     zip_path.unlink(missing_ok=True)
 
     ignore_list = get_build_ignores()
-    os.system(f"zip -r {zip_path} . -x {' '.join(ignore_list)}")
+    ignore_string = "'" + "' '".join(ignore_list) + "'"
+    os.system(f"zip -r {zip_path} . -x {ignore_string}")
 
     entry_src_hooked = build_path / PLUGIN_EXECUTE_FILENAME
     hook_env_snippet(entry_src_hooked)
