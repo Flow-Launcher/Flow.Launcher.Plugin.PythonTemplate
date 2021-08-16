@@ -36,7 +36,6 @@ lib_path.mkdir(exist_ok=True)
 # file
 build_ignore_path = basedir / ".buildignore"
 build_ignore_path.touch()  # if no existed, would be created
-entry_src = basedir / PLUGIN_EXECUTE_FILENAME
 plugin_info_path = basedir / "plugin.json"
 zip_path = build_path / f"{PLUGIN_ZIP_NAME}"
 
@@ -71,7 +70,7 @@ def get_build_ignores(comment: str = "#") -> List[str]:
     return ignore_list
 
 
-def hook_env_snippet(temp_path):
+def hook_env_snippet(exec_file: str = PLUGIN_EXECUTE_FILENAME) -> str:
     """Hook lib folder path to python system environment variable path."""
 
     env_snippet = dedent(
@@ -84,9 +83,13 @@ def hook_env_snippet(temp_path):
     """
     )
 
+    temp_path = build_path / exec_file
+    entry_src = basedir / exec_file
     with open(entry_src, "r") as f_r:
         with open(temp_path, "w") as f_w:
             f_w.write(env_snippet + f_r.read())
+
+    return temp_path
 
 
 @click.group()
@@ -166,8 +169,7 @@ def build():
     ignore_string = "'" + "' '".join(ignore_list) + "'"
     os.system(f"zip -r {zip_path} . -x {ignore_string}")
 
-    entry_src_hooked = build_path / PLUGIN_EXECUTE_FILENAME
-    hook_env_snippet(entry_src_hooked)
+    entry_src_hooked = hook_env_snippet()
     os.system(f"zip -j {zip_path} {entry_src_hooked}")
     entry_src_hooked.unlink()
 
