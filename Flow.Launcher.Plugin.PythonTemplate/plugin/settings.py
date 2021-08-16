@@ -44,6 +44,9 @@ PLUGIN_AUTHOR = "AUTHOR_NAME"
 PLUGIN_ACTION_KEYWORD = "KEYWORD"
 PLUGIN_PROGRAM_LANG = "python"
 PLUGIN_EXECUTE_FILENAME = "main.py"
+PLUGIN_ZIP_NAME = f"{__package_name__}-{__version__}.zip"
 PLUGIN_URL = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
-PLUGIN_URL_DOWNLOAD = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
 PLUGIN_URL_SOURCE_CODE = f"https://github.com/{GITHUB_USERNAME}/{__package_name__}"
+PLUGIN_URL_DOWNLOAD = (
+    f"{PLUGIN_URL_SOURCE_CODE}/releases/download/v{__version__}/{PLUGIN_ZIP_NAME}"
+)
