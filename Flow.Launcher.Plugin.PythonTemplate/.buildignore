@@ -1,0 +1,12 @@
+# folder
+.git/*
+.github/*
+.vscode/*
+.history/*
+*/__pycache__/*
+build/*
+
+# file
+.gitignore
+.gitattributes
+.buildignore

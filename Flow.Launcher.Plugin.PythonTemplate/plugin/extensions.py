@@ -2,10 +2,13 @@
 
 import gettext
 
-from plugin.settings import LOCAL
+from plugin.settings import LOCAL, TRANSLATIONS_PATH
 
 # localization
 translation = gettext.translation(
-    "messages", "plugin/translations/", languages=[LOCAL])
+    "messages",
+    TRANSLATIONS_PATH,
+    languages=[LOCAL],
+)
 
 _l = translation.gettext
