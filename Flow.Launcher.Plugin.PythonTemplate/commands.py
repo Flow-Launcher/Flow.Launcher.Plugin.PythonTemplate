@@ -141,22 +141,6 @@ def plugin():
 
 
 @plugin.command()
-def install_dependencies():
-    """Install dependencies to local."""
-
-    os.system(f"pip install -r requirements.txt -t {lib_path} --upgrade")
-
-    click.echo("Done.")
-
-@plugin.command()
-def setup_dev_env():
-    """Set up the development environment for the first time. This installs requirements-dev.txt """
-
-    os.system(f"pip install -r requirements-dev.txt --upgrade")
-
-    click.echo("Dev environment ready to go.")
-
-@plugin.command()
 def gen_plugin_info():
     """Auto generate the 'plugin.json' file for Flow."""
 
@@ -179,6 +163,33 @@ def build():
     entry_src_hooked = hook_env_snippet()
     os.system(f"zip -j {zip_path} {entry_src_hooked}")
     entry_src_hooked.unlink()
+
+    click.echo("Done.")
+
+
+@click.group()
+def env():
+    ...
+
+
+@env.command()
+def setup_env():
+    """
+    Set up the environment for the first time.
+    This installs requirements.txt and requirements-dev.txt
+    """
+
+    os.system("pip install -r requirements.txt --upgrade")
+    os.system("pip install -r requirements-dev.txt --upgrade")
+
+    click.echo("Environment ready to go.")
+
+
+@env.command()
+def setup_env_to_lib():
+    """Install dependencies to local."""
+
+    os.system(f"pip install -r requirements.txt -t {lib_path} --upgrade")
 
     click.echo("Done.")
 
@@ -212,6 +223,7 @@ if __name__ == "__main__":
     cli = click.CommandCollection(
         sources=[
             clean,
+            env,
             plugin,
             translate,
         ]
