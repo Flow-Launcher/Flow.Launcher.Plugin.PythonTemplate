@@ -17,6 +17,7 @@ from plugin import (
     PLUGIN_URL,
     PLUGIN_URL_DOWNLOAD,
     PLUGIN_URL_SOURCE_CODE,
+    PLUGIN_ZIP_NAME,
     TRANSLATIONS_PATH,
     __long_description__,
     __package_name__,
@@ -37,6 +38,7 @@ build_ignore_path = basedir / ".buildignore"
 build_ignore_path.touch()  # if no existed, would be created
 entry_src = basedir / PLUGIN_EXECUTE_FILENAME
 plugin_info_path = basedir / "plugin.json"
+zip_path = build_path / f"{PLUGIN_ZIP_NAME}"
 
 plugin_infos = {
     "ID": PLUGIN_ID,
@@ -158,7 +160,6 @@ def gen_plugin_info():
 def build():
     "Pack plugin to a zip file."
 
-    zip_path = build_path / f"{__package_name__}-{__version__}.zip"
     zip_path.unlink(missing_ok=True)
 
     ignore_list = get_build_ignores()
