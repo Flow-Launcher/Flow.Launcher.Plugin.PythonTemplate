@@ -1,11 +1,3 @@
 # vscode
 .history/
 .vscode/
-
-
-# python cache
-__pycache__/
-
-
-# mypy cache
-.mypy_cache/

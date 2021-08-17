@@ -13,21 +13,21 @@ class Main(FlowLauncher):
 
     def sendNormalMess(self, title: str, subtitle: str):
         message = copy.deepcopy(RESULT_TEMPLATE)
-        message['Title'] = title
-        message['SubTitle'] = subtitle
+        message["Title"] = title
+        message["SubTitle"] = subtitle
 
         self.messages_queue.append(message)
 
     def sendActionMess(self, title: str, subtitle: str, method: str, value: List):
         # information
         message = copy.deepcopy(RESULT_TEMPLATE)
-        message['Title'] = title
-        message['SubTitle'] = subtitle
+        message["Title"] = title
+        message["SubTitle"] = subtitle
 
         # action
         action = copy.deepcopy(ACTION_TEMPLATE)
-        action['JsonRPCAction']['method'] = method
-        action['JsonRPCAction']['parameters'] = value
+        action["JsonRPCAction"]["method"] = method
+        action["JsonRPCAction"]["parameters"] = value
         message.update(action)
 
         self.messages_queue.append(message)
